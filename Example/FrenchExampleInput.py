@@ -1,7 +1,8 @@
-from math import dist
-import pygame
-import sys
-import random
+
+de math importe dist
+importe pygame
+importe sys
+importe random
 
 
 width = 1280
@@ -9,29 +10,29 @@ height = 720
 #set title of window to "Solo Pong: You're alone"
 pygame.display.set_caption("Solo Pong: You're alone")
 
-#load and set window icon
+#load et set window icon
 icon = pygame.image.load('Icon.png')
 pygame.display.set_icon(icon)
 
 score = 0
 
-class Main:
+classe Main:
     def __init__(self):
         self.score = 0
     def drawScore(self):
         #cast score int to string
         score_text = str(self.score) 
-        #create surface for the scores shadow and set its position
-        Shadow_surface = game_font.render(score_text,True, (51, 51, 51))
+        #create surface pour the scores shadow et set its position
+        Shadow_surface = game_font.render(score_text,Vrai, (51, 51, 51))
         Shadx = int(65)
         Shady = int(45)
-        #create a rectangle for the shadow to sit inside of, and paste it on the screen with screen.blit
+        #create a rectangle pour the shadow to sit inside of, et paste it on the screen avec screen.blit
         Shadow_rect = Shadow_surface.get_rect(center = (Shadx, Shady))
         
         screen.blit(Shadow_surface, Shadow_rect)
         #do the exact same steps but offset by -5px to create a dropshadow 
         score_text = str(self.score) 
-        score_surface = game_font.render(score_text,True, (255, 255, 255))
+        score_surface = game_font.render(score_text,Vrai, (255, 255, 255))
         scorex = int(60)
         scorey = int(40)
         score_rect = score_surface.get_rect(center = (scorex, scorey))
@@ -40,22 +41,22 @@ class Main:
 
 
     def update(self):
-        # if score is even, set window title to ping. Else set to Pong
-        if self.score == 0:
-            pass
-        else:
-            if self.score % 2 == 0:
+        # si score est even, set window title to ping. Else set to Pong
+        si self.score == 0:
+            passeeee
+        sinon:
+            si self.score % 2 == 0:
                 pygame.display.set_caption('ping')
                 
                 
-            else:
+            sinon:
                 pygame.display.set_caption('pong')
 
-class Paddle:
+classe Paddle:
     
     def __init__(self):
-        self.left = False
-        self.right = False
+        self.left = Faux
+        self.right = Faux
         self.w = 200
         self.h = 40
         self.x = width / 2 - self.w / 2
@@ -66,17 +67,17 @@ class Paddle:
     def update(self):
 
 
-        if self.left:
+        si self.left:
             self.x -= self.speed
-        if self.right:
+        si self.right:
             self.x += self.speed
 
-        if self.x > 1080:
+        si self.x > 1080:
             self.x = 1080
-            self.right = False
-        if self.x < 0:
+            self.right = Faux
+        si self.x < 0:
             self.x = 0
-            self.left = False
+            self.left = Faux
         
 
     def draw(self):
@@ -86,7 +87,7 @@ class Paddle:
         pygame.draw.rect(screen, (255, 255, 255), PaddleRect, 5)
         
         
-class Ball:
+classe Ball:
     def __init__(self, x, y, ax, ay,r):
         self.x = x
         self.y = y
@@ -105,22 +106,22 @@ class Ball:
         
         
 
-        if self.x > pad.x and self.x < pad.x + pad.w:
-            if self.y + self.R > pad.y and self.y < pad.y + pad.h:
-                if self.y + self.R < pad.y and self.y > pad.y + pad.h:
+        si self.x > pad.x et self.x < pad.x + pad.w:
+            si self.y + self.R > pad.y et self.y < pad.y + pad.h:
+                si self.y + self.R < pad.y et self.y > pad.y + pad.h:
                     self.y = pad.y
                     
-                else:
+                sinon:
                     self.vy *= -1 
                     main.score += 1
                     self.RandPhysics(pad)
                     self.vx *= dist((self.x, self.y), (pad.x + pad.w / 2, pad.y)) / 40
-                    if self.vx < 0 and self.x > pad.x + 2 * (pad.w / 3):
+                    si self.vx < 0 et self.x > pad.x + 2 * (pad.w / 3):
                         self.vx *= -1
-                    if self.vx > 0 and self.x < pad.x + pad.w / 3:
+                    si self.vx > 0 et self.x < pad.x + pad.w / 3:
                         self.vx *= -1
                      
-        if self.y > height - self.R:
+        si self.y > height - self.R:
             self.y = height - self.R
 
 
@@ -131,20 +132,20 @@ class Ball:
         self.vy += self.ay
         self.y += self.vy   
         
-        if self.vy > 4:
+        si self.vy > 4:
             self.vy = 4
-        if self.vx > 5:
+        si self.vx > 5:
             self.vx = 5
 
-        if self.x < 0:
+        si self.x < 0:
             self.x = 0
             self.vx *= -1
             self.RandPhysics(pad)
-        if self.x > width - self.R:
+        si self.x > width - self.R:
             self.x = width - self.R
             self.vx *= -1
             self.RandPhysics(pad)
-        if self.y < 0:
+        si self.y < 0:
             self.RandPhysics(pad)
             self.y = 0
             self.vy *= -1
@@ -152,7 +153,7 @@ class Ball:
         self.ax = 0
         self.ay = 0
 
-        if self.y > pad.y + pad.h * 3:
+        si self.y > pad.y + pad.h * 3:
             self.x = 640
             self.y = 360
             self.vx = 2
@@ -165,18 +166,18 @@ class Ball:
 
     def RandPhysics(self, pad):
         rand = random.randrange(0, 2)
-        if rand == 1:
+        si rand == 1:
             self.G = 0.03
-        else:
+        sinon:
             self.G = 0
         self.PlayRandSound()
     def PlayRandSound(self):
         rand = random.randrange(0, 3)
-        if rand == 0:
+        si rand == 0:
             self.LoB.play()
-        if rand == 1:
+        si rand == 1:
             self.MiB.play()
-        if rand == 2:
+        si rand == 2:
             self.HiB.play()
         
         
@@ -208,23 +209,23 @@ main = Main()
 paddle = Paddle() 
 
 ball = Ball(640, 360, random.randrange(-4, 4), -5, 20)
-while True:
+pendant Vrai:
     screen.fill(BGcolor)    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    pour event dans pygame.event.get():
+        si event.type == pygame.QUIT:
             pygame.quit()
             sys.exit
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                paddle.left = True
-            if event.key == pygame.K_RIGHT:
-                paddle.right = True
+        si event.type == pygame.KEYDOWN:
+            si event.key == pygame.K_LEFT:
+                paddle.left = Vrai
+            si event.key == pygame.K_RIGHT:
+                paddle.right = Vrai
 
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT:
-                paddle.left = False
-            if event.key == pygame.K_RIGHT:
-                paddle.right = False
+        si event.type == pygame.KEYUP:
+            si event.key == pygame.K_LEFT:
+                paddle.left = Faux
+            si event.key == pygame.K_RIGHT:
+                paddle.right = Faux
 
     
     ball.update(paddle, main)
