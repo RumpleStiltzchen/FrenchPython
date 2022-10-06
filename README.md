@@ -6,3 +6,5 @@ And boom! you're golden.
 You can also do
 `python French.py help`
 Check the example folder for a batch file that has the command if you still need help :)
+\n======================================================================================================
+Attention! you have to start your french program on the second line opposed to the first line
